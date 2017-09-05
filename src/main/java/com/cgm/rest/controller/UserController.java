@@ -8,7 +8,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,21 +23,22 @@ public class UserController {
 	@RequestMapping(value = "/friends", method = RequestMethod.GET)
 	protected @ResponseBody ModelAndView getUsers() throws Exception {
 			Map model = new HashMap();
-			model.put("users", ListUsers.getUsers());
+			model.put("users", ListUsers.users);
 			return new ModelAndView("friends", model);
 	}
-	
+	/*
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@RequestMapping(value = "/friends", method = RequestMethod.POST)
 	protected ModelAndView follow(@ModelAttribute("friend") User friend, HttpServletRequest request, Map model) {
 		model.put("friends", new User());
 		return new ModelAndView("redirect:/main", model);
 	}
+	*/
 	
 	private List<String> friendsMessages(List<String> friends){
 		List<String> messages = new ArrayList<String>();
 		for(String friend : friends) {
-			for(User user : ListUsers.getUsers()) {
+			for(User user : ListUsers.users) {
 				if(user.getUsername().equals(friend)) {
 					messages.addAll(user.getMessages());
 				}
@@ -52,7 +52,7 @@ public class UserController {
 	@ResponseBody
 	protected ModelAndView getUserMessages(HttpServletRequest request) throws Exception{
 		User user = (User)request.getSession().getAttribute("LOGGEDIN_USER");
-		List<User> users = ListUsers.getUsers();
+		List<User> users = ListUsers.users;
 		if(user != null) {
 			Map model = new HashMap();
 			model.put("username", user.getUsername());

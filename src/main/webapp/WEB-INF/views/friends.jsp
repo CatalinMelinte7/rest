@@ -17,15 +17,32 @@ list-style-type:none;
 <hr/>
 	<ul>
 		<c:forEach var="userList" items="${users}">
-			<li>Username: <c:out value="${userList.username}"/> </li>
+			<li id="username">Username: <c:out value="${userList.username}"/> </li>
 			<li>Password: <c:out value="${userList.password}"/> </li>
 			<li>Email: <c:out value="${userList.email}"/> </li>
-			<sf:form action="/rest/friends" method="POST" modelAttribute="friend">
-				<input type="hidden" name="_method" value="POST" />
-				<li> <input name="commit" type="submit" value="Follow"/> </li>
-			</sf:form>
+			<input type="submit" id="follow" value="Follow"/>
 			<br/>
 		</c:forEach>
 	</ul>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script>
+		$('#follow').click( function() { 
+		 var user = document.getElementById("username").value;
+		 $.ajax({
+		  url: 'http://localhost:8080/rest/follow',
+		  type:'post',
+		         dataType : 'json',
+		         async : true,
+		         data: JSON.stringify(user),
+		         contentType: 'application/json; charset=utf-8',
+		 		 success: function(data) 
+		   		 {
+		  		 location.reload();
+		  		 },
+		 		  failure: function(data){
+		  		 }
+		  }); 
+		 });
+	</script>
 </html>

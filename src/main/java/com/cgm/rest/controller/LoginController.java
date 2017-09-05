@@ -36,7 +36,7 @@ public class LoginController {
 	@ResponseBody
 	protected ModelAndView login(@ModelAttribute("user") User user, HttpServletRequest request){
 		
-		List<User> userList = ListUsers.getUsers();
+		List<User> userList = ListUsers.users;
 		
 		for(User u : userList) {
 			if(user.getUsername().equals(u.getUsername())) {
