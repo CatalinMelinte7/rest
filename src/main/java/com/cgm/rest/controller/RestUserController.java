@@ -45,9 +45,11 @@ public class RestUserController {
 		String user = username.substring(1, username.length() - 1);
 		for(int counter = 0; counter < userList.size(); counter++) {
 			if(user.equals(userList.get(counter).getUsername())) {
+				System.out.println("User " + username + " found!");
 				return new ModelAndView("redirect:/user/" + counter);
 			}
 		}
+		System.out.println("USERNAME " + username + " NOT FOUND!");
 		return new ModelAndView("redirect:/");
 	}
 	

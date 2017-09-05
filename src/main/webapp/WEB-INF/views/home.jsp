@@ -19,10 +19,12 @@ Post a message!
 <br/>
 <input type="text" id="content"/>
 <input type="submit" id="submit" value="Post Message"/>
-
-<div style="float:right">
-<input type="text" id="searchbar">
-<input type="submit" id="search" value="Search" />
+<br/>
+<br/>
+Search for an user!
+<div>
+	<input type="text" id="searchbar">
+	<input type="submit" id="search" value="Search" />
 </div>
 
 </body>
